@@ -2,37 +2,37 @@ package main
 
 import "fmt"
 
-type Animal interface{
+type Animal interface {
 	speak()
 }
 
-type cat struct {}
+type cat struct{ name string }
 
-func(c *cat)speak(){
-	fmt.Println("MEWMEWEEWMEMW")
-}
-type dog struct {}
-
-func(d *dog)speak(){
-	fmt.Println("BARK")
-}
-type horse struct{}
-
-func(h *horse)speak(){
-	fmt.Println("IGOGO")
+func (c *cat) speak() {
+	fmt.Println(c.name, "MEWMEWEEWMEMW")
 }
 
-func main(){
-	var cat Animal = &cat{}
+type dog struct{ name string }
 
-	var cat2 Animal = cat
+func (d *dog) speak() {
+	fmt.Println(d.name, "BARK")
+}
 
-	var dog Animal = &dog{}
+type horse struct{ name string }
 
-	var horse Animal = &horse{}
+func (h *horse) speak() {
+	fmt.Println(h.name, "IGOGO")
+}
 
-	animals:= [...]Animal{cat,cat2,dog,horse}
-	for _,animal:= range(animals){
+func main() {
+	var cat Animal = &cat{"Alice"}
+
+	var dog Animal = &dog{"Max"}
+
+	var horse Animal = &horse{"Imperor"}
+
+	animals := [...]Animal{cat, dog, horse}
+	for _, animal := range animals {
 		animal.speak()
 	}
 }
